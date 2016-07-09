@@ -1,13 +1,41 @@
 <?php
+include_once '../db/Conexao.php';
+
 class Usuario {
-    public $email;
-    public $nome;
-    public $nascimento;
+   private $id ;
+   private $nome;
+   private $email;
+   private $senha;
+   
+   function getId() {
+       return $this->id;
+   }
+   function getNome() {
+       return $this->nome;
+   }
+   function getEmail() {
+       return $this->email;
+   }
+   function getSenha() {
+       return $this->senha;
+   }
+   function setId($id) {
+       $this->id = $id;
+   }
+   function setNome($nome) {
+       $this->nome = $nome;
+   }
+   function setEmail($email) {
+       $this->email = $email;
+   }
+   function setSenha($senha) {
+       $this->senha = $senha;
+   }
+   public function listarTodosUsuarios() {
+        $sql = 'SELECT * FROM tb_usuarios';
+        $query = Conexao::prepare($sql);
+        $query->execute();
+        return $query->fetchAll();
+    }
     
-    public function autenticar() {
-        echo "Usuário autenticou no sistema";
-    }
-    public function sair() {
-        echo "Usuário saiu do sistema";
-    }
 }
